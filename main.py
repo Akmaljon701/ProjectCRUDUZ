@@ -4,7 +4,7 @@ from fastapi_utils.tasks import repeat_every
 from sqlalchemy.orm import Session
 import traceback
 from fastapi.openapi.utils import get_openapi
-from routes import auth, users, projects, categories, targets, uploaded_fields
+from routes import auth, users, projects, categories, targets, uploaded_files
 from db import Base, engine
 
 from fastapi.middleware.cors import CORSMiddleware
@@ -36,7 +36,7 @@ app.include_router(users.router_user, prefix='/user', tags=['User apis'],)
 app.include_router(projects.router_project, prefix='/project', tags=['Project apis'],)
 app.include_router(categories.router_category, prefix='/category', tags=['Category apis'],)
 app.include_router(targets.router_target, prefix='/target', tags=['Target apis'],)
-app.include_router(uploaded_fields.router_uploaded_files, prefix='/file', tags=['File apis'],)
+app.include_router(uploaded_files.router_uploaded_files, prefix='/file', tags=['File apis'],)
 
 
 def custom_openapi():

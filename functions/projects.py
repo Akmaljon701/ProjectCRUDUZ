@@ -5,11 +5,11 @@ from utils.pagination import save_in_db
 
 
 def one_project(id, db):
-    return db.query(Projects).filter_by(id=id)
+    return db.query(Projects).filter_by(id=id, status=True)
 
 
 def create_project(form, user, db):
-    project = db.query(Projects).filter_by(name=form.name).first()
+    project = db.query(Projects).filter_by(name=form.name, status=True).first()
     if project is None:
         new_project = Projects(
             name=form.name,

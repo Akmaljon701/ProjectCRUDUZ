@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from db import Base, engine, get_db
 from sqlalchemy.orm import Session
 
-from functions.target import create_target, all_targets, update_target, update_count_watches
+from functions.targets import create_target, all_targets, update_target, update_count_watches
 from routes.auth import get_current_active_user
 from schemas.target import TargetCreate, TargetUpdate
 from schemas.users import UserCurrent

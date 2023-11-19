@@ -28,12 +28,14 @@ def create_category(form, user, db):
 
 def create_category_items(form, user, db):
     for item in form:
-        new_category_item = CategoryItems(
-            text=item.text,
-            category_id=item.category_id,
-            user_id=user.id
-        )
-        save_in_db(db, new_category_item)
+        if db.query(CategoryItems).filter_by(text=item.text, category_id=item.category_id).first(): pass
+        else:
+            new_category_item = CategoryItems(
+                text=item.text,
+                category_id=item.category_id,
+                user_id=user.id
+            )
+            save_in_db(db, new_category_item)
     return True
 
 
