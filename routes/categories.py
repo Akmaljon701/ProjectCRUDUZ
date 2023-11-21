@@ -5,7 +5,7 @@ from pydantic import Field
 from db import Base, engine, get_db
 from sqlalchemy.orm import Session
 from functions.categories import create_category, create_category_items, all_categories, category_update, \
-    category_item_update
+    category_item_update, one_category, one_category_item
 from routes.auth import get_current_active_user
 from schemas.categories import CategoryItemsCreate, CategoryCreate, CategoryUpdate, CategoryItemUpdate
 from schemas.users import UserCurrent
@@ -61,3 +61,17 @@ async def update_data(form: CategoryItemUpdate,
     if category_item_update(form, db):
         raise HTTPException(status_code=200, detail="Updated successfully")
     raise HTTPException(status_code=400, detail="id does not exist!")
+
+
+@router_category.get("/one_category")
+async def read_data(category_id: int, db: Session = Depends(get_db),
+                    current_user: UserCurrent = Depends(get_current_active_user)):
+    role_verification(current_user, 'one_category')
+    return one_category(category_id, db).first()
+
+
+@router_category.get("/one_category_item")
+async def read_data(category_item_id: int, db: Session = Depends(get_db),
+                    current_user: UserCurrent = Depends(get_current_active_user)):
+    role_verification(current_user, 'one_category_item')
+    return one_category_item(category_item_id, db).first()

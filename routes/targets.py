@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from db import Base, engine, get_db
 from sqlalchemy.orm import Session
 
-from functions.targets import create_target, all_targets, update_target, update_count_watches
+from functions.targets import create_target, all_targets, update_target, update_count_watches, one_target
 from routes.auth import get_current_active_user
 from schemas.target import TargetCreate, TargetUpdate
 from schemas.users import UserCurrent
@@ -46,3 +46,10 @@ async def update_data(link: str,
     if update_count_watches(link, db):
         raise HTTPException(status_code=200, detail="Updated successfully")
     raise HTTPException(status_code=400, detail="id does not exist!")
+
+
+@router_target.get('/one_target')
+async def read_data(target_id: int, db: Session = Depends(get_db),
+                    current_user: UserCurrent = Depends(get_current_active_user)):
+    role_verification(current_user, 'all_targets')
+    return one_target(target_id, db)

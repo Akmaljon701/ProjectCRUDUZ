@@ -5,7 +5,8 @@ def role_verification(user, function):
 
     allowed_functions_for_admins = ['create_project', 'update_project', 'delete_project', 'create_category_items',
                                     'create_category', 'all_categories', 'category_update', 'category_item_update',
-                                    'create_target', 'all_targets', 'update_target', 'create_uploaded_file']
+                                    'create_target', 'all_targets', 'update_target', 'create_uploaded_file',
+                                    'one_category', 'one_category_item']
 
     allowed_functions_for_smms = []
 
