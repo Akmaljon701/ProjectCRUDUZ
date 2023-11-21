@@ -5,10 +5,10 @@ from db import Base, get_db
 
 
 def pagination(form, page, limit):
-    if page and limit :
+    if page and limit:
         return {"current_page": page, "limit": limit, "pages": ceil(form.count() / limit),
                 "data": form.offset((page - 1) * limit).limit(limit).all()}
-    else :
+    else:
         return form.all()
 
 
