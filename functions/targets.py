@@ -2,6 +2,7 @@ from sqlalchemy import desc
 from sqlalchemy.orm import joinedload
 
 from models.targets import Targets
+from functions.projects import one_project
 from utils.pagination import save_in_db
 from uuid import uuid4
 
@@ -13,8 +14,11 @@ def one_target(target_id, db):
 def create_target(form, user, db):
     target = db.query(Targets).filter_by(comment=form.comment).first()
     if target is None:
+        project = one_project(form.project_id, db).first()
+        if project is None:
+            return False
         new_category = Targets(
-            link=uuid4(),
+            link=f"{project.url}/{uuid4()}",
             status=form.status,
             comment=form.comment,
             project_id=form.project_id,

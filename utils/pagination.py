@@ -5,8 +5,11 @@ from db import Base, get_db
 
 
 def pagination(form, page, limit):
-    return {"current_page": page, "limit": limit, "pages": ceil(form.count() / limit),
-            "data": form.offset((page - 1) * limit).limit(limit).all()}
+    if page and limit :
+        return {"current_page": page, "limit": limit, "pages": ceil(form.count() / limit),
+                "data": form.offset((page - 1) * limit).limit(limit).all()}
+    else :
+        return form.all()
 
 
 def save_in_db(db, obj):

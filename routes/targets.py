@@ -21,7 +21,7 @@ async def write_data(form: TargetCreate,
     role_verification(current_user, 'create_target')
     if create_target(form, current_user, db):
         raise HTTPException(status_code=201, detail="Created successfully!")
-    raise HTTPException(status_code=400, detail="Category has already been added!")
+    raise HTTPException(status_code=400, detail="Category has already been added or project id doesn't exited!")
 
 
 @router_target.get('/all')
