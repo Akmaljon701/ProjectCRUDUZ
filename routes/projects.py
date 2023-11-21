@@ -13,10 +13,10 @@ router_project = APIRouter()
 
 
 @router_project.post('/create')
-async def write_data(form: ProjectCreate,
-                     db: Session = Depends(get_db),
-                     current_user: UserCurrent = Depends(get_current_active_user)):
-    role_verification(current_user, 'create_project')
+async def create_project_data(form: ProjectCreate,
+                              db: Session = Depends(get_db),
+                              current_user: UserCurrent = Depends(get_current_active_user)):
+    role_verification(current_user, 'create_project_data')
     if create_project(form, current_user, db):
         raise HTTPException(status_code=201, detail="Created successfully!")
     raise HTTPException(status_code=400, detail="Category has already been added!")
@@ -28,10 +28,10 @@ async def read_data(db: Session = Depends(get_db)):
 
 
 @router_project.put('/update')
-async def update_data(form: ProjectUpdate,
-                      db: Session = Depends(get_db),
-                      current_user: UserCurrent = Depends(get_current_active_user)):
-    role_verification(current_user, 'update_project')
+async def update_project_data(form: ProjectUpdate,
+                              db: Session = Depends(get_db),
+                              current_user: UserCurrent = Depends(get_current_active_user)):
+    role_verification(current_user, 'update_project_data')
     if update_project(form, current_user, db):
         raise HTTPException(status_code=200, detail="Updated successfully")
     raise HTTPException(status_code=400, detail="id does not exist!")

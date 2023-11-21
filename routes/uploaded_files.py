@@ -18,13 +18,13 @@ router_uploaded_files = APIRouter()
 
 
 @router_uploaded_files.post("/add")
-async def write_data(source_id: int = Body(..., ge=0),
-                     comment: typing.Optional[str] = Body(''),
-                     source: typing.Optional[str] = Body(''),
-                     files: typing.Optional[typing.List[UploadFile]] = File(None),
-                     db: Session = Depends(get_db),
-                     current_user: UserCurrent = Depends(get_current_active_user)):
-    role_verification(current_user, 'create_uploaded_file')
+async def create_uploaded_file_data(source_id: int = Body(..., ge=0),
+                                    comment: typing.Optional[str] = Body(''),
+                                    source: typing.Optional[str] = Body(''),
+                                    files: typing.Optional[typing.List[UploadFile]] = File(None),
+                                    db: Session = Depends(get_db),
+                                    current_user: UserCurrent = Depends(get_current_active_user)):
+    role_verification(current_user, 'create_uploaded_file_data')
     for file in files:
         if (file.content_type in allowed_image_types) or (file.content_type in allowed_video_types):
             file.filename = f"{uuid.uuid4()}-{file.filename}"
@@ -51,9 +51,11 @@ async def read_data(file_id: int = File(ge=0),
 
 
 @router_uploaded_files.put("/update_file_by_id")
-async def update_data(file_id: int = File(ge=0), file: UploadFile = File(None),
-                      comment: str = Form(None), source: str = Form(None),
-                      db: Session = Depends(get_db), current_user: UserCurrent = Depends(get_current_active_user)):
+async def update_uploaded_file_data(file_id: int = File(ge=0), file: UploadFile = File(None),
+                                    comment: str = Form(None), source: str = Form(None),
+                                    db: Session = Depends(get_db),
+                                    current_user: UserCurrent = Depends(get_current_active_user)):
+    role_verification(current_user, 'update_uploaded_file_data')
     file_data = db.query(UploadedFiles).filter_by(id=file_id).first()
     if file_data:
         if file:

@@ -3,10 +3,12 @@ from fastapi import HTTPException
 
 def role_verification(user, function):
 
-    allowed_functions_for_admins = ['create_project', 'update_project', 'delete_project', 'create_category_items',
-                                    'create_category', 'all_categories', 'category_update', 'category_item_update',
-                                    'create_target', 'all_targets', 'update_target', 'create_uploaded_file',
-                                    'one_category', 'one_category_item']
+    allowed_functions_for_admins = ['create_project_data', 'update_project_data', 'delete_project_data',
+                                    'create_category_items_data', 'create_category_data', 'all_categories_data',
+                                    'category_update_data', 'category_item_update_data',  'one_category_data',
+                                    'one_category_item_data',
+                                    'create_target_data', 'all_targets_data', 'update_target_data',
+                                    'create_uploaded_file_data']
 
     allowed_functions_for_smms = []
 

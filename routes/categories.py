@@ -17,61 +17,61 @@ router_category = APIRouter()
 
 
 @router_category.post("/create")
-async def write_data(form: CategoryCreate,
-                     db: Session = Depends(get_db),
-                     current_user: UserCurrent = Depends(get_current_active_user)):
-    role_verification(current_user, 'create_category')
+async def create_category_data(form: CategoryCreate,
+                               db: Session = Depends(get_db),
+                               current_user: UserCurrent = Depends(get_current_active_user)):
+    role_verification(current_user, 'create_category_data')
     if create_category(form, current_user, db):
         raise HTTPException(status_code=201, detail="Created successfully!")
     raise HTTPException(status_code=400, detail="Category has already been added!")
 
 
 @router_category.post("/create_items")
-async def write_data(form: List[CategoryItemsCreate],
-                     db: Session = Depends(get_db),
-                     current_user: UserCurrent = Depends(get_current_active_user)):
-    role_verification(current_user, 'create_category_items')
+async def create_category_items_data(form: List[CategoryItemsCreate],
+                                     db: Session = Depends(get_db),
+                                     current_user: UserCurrent = Depends(get_current_active_user)):
+    role_verification(current_user, 'create_category_items_data')
     if create_category_items(form, current_user, db):
         raise HTTPException(status_code=201, detail="Created successfully!")
     raise HTTPException(status_code=400, detail="Somthing error!")
 
 
 @router_category.get("/all")
-async def read_data(db: Session = Depends(get_db),
-                    current_user: UserCurrent = Depends(get_current_active_user)):
-    role_verification(current_user, 'all_categories')
+async def all_categories_data(db: Session = Depends(get_db),
+                              current_user: UserCurrent = Depends(get_current_active_user)):
+    role_verification(current_user, 'all_categories_data')
     return all_categories(db)
 
 
 @router_category.put('/update')
-async def update_data(form: CategoryUpdate,
-                      db: Session = Depends(get_db),
-                      current_user: UserCurrent = Depends(get_current_active_user)):
-    role_verification(current_user, 'category_update')
+async def category_update_data(form: CategoryUpdate,
+                               db: Session = Depends(get_db),
+                               current_user: UserCurrent = Depends(get_current_active_user)):
+    role_verification(current_user, 'category_update_data')
     if category_update(form, db):
         raise HTTPException(status_code=200, detail="Updated successfully")
     raise HTTPException(status_code=400, detail="id does not exist!")
 
 
 @router_category.put('/update_item')
-async def update_data(form: CategoryItemUpdate,
-                      db: Session = Depends(get_db),
-                      current_user: UserCurrent = Depends(get_current_active_user)):
-    role_verification(current_user, 'category_item_update')
+async def category_item_update_data(form: CategoryItemUpdate,
+                                    db: Session = Depends(get_db),
+                                    current_user: UserCurrent = Depends(get_current_active_user)):
+    role_verification(current_user, 'category_item_update_data')
     if category_item_update(form, db):
         raise HTTPException(status_code=200, detail="Updated successfully")
     raise HTTPException(status_code=400, detail="id does not exist!")
 
 
 @router_category.get("/one_category")
-async def read_data(category_id: int, db: Session = Depends(get_db),
-                    current_user: UserCurrent = Depends(get_current_active_user)):
-    role_verification(current_user, 'one_category')
+async def one_category_data(category_id: int, db: Session = Depends(get_db),
+                            current_user: UserCurrent = Depends(get_current_active_user)):
+    role_verification(current_user, 'one_category_data')
     return one_category(category_id, db).first()
 
 
 @router_category.get("/one_category_item")
-async def read_data(category_item_id: int, db: Session = Depends(get_db),
-                    current_user: UserCurrent = Depends(get_current_active_user)):
-    role_verification(current_user, 'one_category_item')
+async def one_category_item_data(category_item_id: int, db: Session = Depends(get_db),
+                                 current_user: UserCurrent = Depends(get_current_active_user)):
+    role_verification(current_user, 'one_category_item_data')
     return one_category_item(category_item_id, db).first()
