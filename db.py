@@ -6,7 +6,7 @@ import uvicorn
 # database url
 # SQLALCHEMY_DATABASE_URL = 'mysql+pymysql://crud:hdoB7WSac90rKCYV@localhost:3306/crud_system'
 # SQLALCHEMY_DATABASE_URL = 'mysql+pymysql://root@localhost:3306/crud_system'
-SQLALCHEMY_DATABASE_URL = "postgres://crud_zwwh_user:wGzIWXXwyCZ0QGUALvSQXgHmnk4B3PfL@dpg-clgsoieg1b2c73aapuvg-a/crud_zwwh"
+SQLALCHEMY_DATABASE_URL = "postgres://crud_zwwh_user:wGzIWXXwyCZ0QGUALvSQXgHmnk4B3PfL@dpg-clgsoieg1b2c73aapuvg-a.oregon-postgres.render.com/crud_zwwh"
 # import os
 # BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 # SQLALCHEMY_DATABASE_URL = 'sqlite:///'+os.path.join(BASE_DIR,'bazza.db?check_same_thread=False')
