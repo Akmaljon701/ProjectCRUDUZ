@@ -58,8 +58,8 @@ def update_user(form, user, db):
     if one_user(form.id, db) is None:
         raise HTTPException(status_code=400, detail="Bunday id raqamli foydalanuvchi mavjud emas")
     user_verification = db.query(Users).filter(Users.username == form.username).first()
-    if user_verification and user_verification.id != form.id:
-        raise HTTPException(status_code=400, detail="Bunday foydalanuvchi mavjud")
+    # if user_verification and user_verification.id != form.id:
+    #     raise HTTPException(status_code=400, detail="Bunday foydalanuvchi mavjud")
 
     db.query(Users).filter(Users.id == form.id).update({
         Users.name: form.name,
