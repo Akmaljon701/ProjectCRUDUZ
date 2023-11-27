@@ -18,7 +18,7 @@ def all_users(search, status, roll, page, limit, db):
     if status in [True, False]:
         users = users.filter(Users.status == status)
     if roll:
-        users = users.filter(Users.roll == roll)
+        users = users.filter(Users.role == roll)
     users = users.order_by(Users.name.asc())
     if page and limit:
         return pagination(users, page, limit)
