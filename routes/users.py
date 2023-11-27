@@ -33,4 +33,3 @@ def user_update(form: UserUpdate, db: Session = Depends(get_db),
                 current_user: UserCurrent = Depends(get_current_active_user)):
     if update_user(form, current_user, db):
         raise HTTPException(status_code=200, detail="Amaliyot muvaffaqiyatli amalga oshirildi")
-
