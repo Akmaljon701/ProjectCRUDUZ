@@ -20,12 +20,12 @@ def add_user(form: UserCreate,
 
 
 @router_user.get('/', status_code=200)
-def get_users(search: str = None, status: bool = True, id: int = 0, roll: str = None, page: int = 1, limit: int = 25,
+def get_users(search: str = None, status: bool = True, id: int = 0, role: str = None, page: int = 1, limit: int = 25,
               db: Session = Depends(get_db)):
     if id:
         return one_user(id, db)
     else:
-        return all_users(search, status, roll, page, limit, db)
+        return all_users(search, status, role, page, limit, db)
 
 
 @router_user.put("/update")

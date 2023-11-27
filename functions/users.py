@@ -9,7 +9,7 @@ from utils.pagination import pagination
 pwd_context = CryptContext(schemes=['bcrypt'])
 
 
-def all_users(search, status, roll, page, limit, db):
+def all_users(search, status, role, page, limit, db):
     users = db.query(Users)
     if search:
         search_formatted = "%{}%".format(search)
@@ -17,8 +17,9 @@ def all_users(search, status, roll, page, limit, db):
             search_formatted) | Users.title.like(search_formatted))
     if status in [True, False]:
         users = users.filter(Users.status == status)
-    if roll:
-        users = users.filter(Users.role == roll)
+    if role:
+        users = users.filter(Users.role == role)
+    users = users.order_by(Users.name.asc())
     users = users.order_by(Users.name.asc())
     if page and limit:
         return pagination(users, page, limit)
