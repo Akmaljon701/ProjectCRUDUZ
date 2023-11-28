@@ -14,7 +14,7 @@ def all_users(search, status, role, page, limit, db):
     if search:
         search_formatted = "%{}%".format(search)
         users = users.filter(Users.name.like(search_formatted) | Users.number.like(search_formatted) | Users.username.like(
-            search_formatted) | Users.title.like(search_formatted))
+            search_formatted))
     if status in [True, False]:
         users = users.filter(Users.status == status)
     if role:
@@ -35,10 +35,10 @@ def one_user(id, db):
 def create_user(form, db):
     user_verification = db.query(Users).filter(Users.username == form.username).first()
     if user_verification:
-        raise HTTPException(status_code=400, detail="Bunday foydalanuvchi mavjud")
+        raise HTTPException(status_code=403, detail="User already exists!")
     number_verification = db.query(Users).filter(Users.number == form.number).first()
     if number_verification:
-        raise HTTPException(status_code=400, detail="Bunday telefon raqami  mavjud")
+        raise HTTPException(status_code=400, detail="The phone number already exists!")
 
     new_user_db = Users(
         name=form.name,
@@ -57,7 +57,7 @@ def create_user(form, db):
 
 def update_user(form, user, db):
     if one_user(form.id, db) is None:
-        raise HTTPException(status_code=400, detail="Bunday id raqamli foydalanuvchi mavjud emas")
+        raise HTTPException(status_code=404, detail="User not found!")
 
     db.query(Users).filter(Users.id == form.id).update({
         Users.name: form.name,

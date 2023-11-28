@@ -16,7 +16,7 @@ router_user = APIRouter()
 def add_user(form: UserCreate,
              db: Session = Depends(get_db), ):
     if create_user(form, db):
-        raise HTTPException(status_code=200, detail="Amaliyot muvaffaqiyatli amalga oshirildi")
+        raise HTTPException(status_code=201, detail="Created successfully!")
 
 
 @router_user.get('/', status_code=200)
@@ -32,4 +32,4 @@ def get_users(search: str = None, status: bool = True, id: int = 0, role: str = 
 def user_update(form: UserUpdate, db: Session = Depends(get_db),
                 current_user: UserCurrent = Depends(get_current_active_user)):
     if update_user(form, current_user, db):
-        raise HTTPException(status_code=200, detail="Amaliyot muvaffaqiyatli amalga oshirildi")
+        raise HTTPException(status_code=204, detail="Updated successfully!")

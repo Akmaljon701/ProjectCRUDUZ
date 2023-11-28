@@ -67,7 +67,7 @@ async def login_for_access_token(db: Session = Depends(get_db), form_data: OAuth
     else:
         is_validate_password = False
     if not is_validate_password:
-        raise HTTPException(status_code=400, detail="Login yoki parolda xatolik")
+        raise HTTPException(status_code=400, detail="Login or password error!")
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(
         data={"sub": user.username}, expires_delta=access_token_expires
