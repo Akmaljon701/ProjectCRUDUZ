@@ -38,7 +38,7 @@ def update_target(form, user, db):
     if target.first():
         target.update({
             Targets.status: form.status,
-            Targets.comment: form.commit,
+            Targets.comment: form.comment,
             Targets.project_id: form.project_id,
             Targets.user_id: user.id
         })
