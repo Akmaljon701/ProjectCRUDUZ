@@ -9,6 +9,7 @@ from sqlalchemy.orm import Session
 from functions.uploaded_files import create_uploaded_file, read_files_by_source_id, read_file_by_id, update_file_by_id
 from models.uploaded_files import UploadedFiles
 from routes.auth import get_current_active_user
+from schemas.uploaded_fields import FileBySourceId
 from schemas.users import UserCurrent
 from utils.role_verification import role_verification, allowed_image_types, allowed_video_types
 
@@ -38,9 +39,9 @@ async def create_uploaded_file_data(source_id: int = Body(..., ge=0),
 
 
 @router_uploaded_files.post("/files_by_source_id")
-async def read_data(source_id: int = File(ge=0),
+async def read_data(form: FileBySourceId,
                     db: Session = Depends(get_db)):
-    return read_files_by_source_id(source_id, db)
+    return read_files_by_source_id(form.source_id, db)
 
 
 @router_uploaded_files.post("/file_by_id")
