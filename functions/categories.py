@@ -6,7 +6,7 @@ from utils.pagination import save_in_db
 
 
 def one_category(category_id, db):
-    return db.query(Categories).filter_by(id=category_id)
+    return db.query(Categories).filter_by(id=category_id).options(joinedload('category_items'))
 
 
 def one_category_item(category_item_id, db):

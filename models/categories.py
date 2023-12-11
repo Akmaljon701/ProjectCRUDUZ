@@ -21,4 +21,5 @@ class CategoryItems(Base):
     category_id = Column(Integer, ForeignKey("Categories.id"))
     user_id = Column(Integer, ForeignKey("Users.id"))
     ordinal_number = Column(Integer)
+
     category = relationship('Categories', back_populates='category_items')
