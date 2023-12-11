@@ -7,7 +7,7 @@ def role_verification(user, function):
                                     'create_category_items_data', 'create_category_data',
                                     'category_update_data', 'category_item_update_data',
                                     'create_target_data', 'all_targets_data', 'update_target_data',
-                                    'create_uploaded_file_data']
+                                    'create_uploaded_file_data', 'update_uploaded_file_data']
 
     allowed_functions_for_smms = []
 
