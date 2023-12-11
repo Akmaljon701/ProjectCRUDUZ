@@ -6,7 +6,7 @@ from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Body, F
 from db import Base, engine, get_db
 from sqlalchemy.orm import Session
 
-from functions.uploaded_files import create_uploaded_file, read_files_by_source_id, read_file_by_id, update_file_by_id
+from functions.uploaded_files import create_uploaded_file, read_files_by_source_id, read_file_by_id
 from models.uploaded_files import UploadedFiles
 from routes.auth import get_current_active_user
 from schemas.uploaded_fields import FileBySourceId

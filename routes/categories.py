@@ -37,9 +37,7 @@ async def create_category_items_data(form: List[CategoryItemsCreate],
 
 
 @router_category.get("/all")
-async def all_categories_data(db: Session = Depends(get_db),
-                              current_user: UserCurrent = Depends(get_current_active_user)):
-    role_verification(current_user, 'all_categories_data')
+async def all_categories_data(db: Session = Depends(get_db)):
     return all_categories(db)
 
 
@@ -64,14 +62,10 @@ async def category_item_update_data(form: CategoryItemUpdate,
 
 
 @router_category.get("/one_category")
-async def one_category_data(category_id: int, db: Session = Depends(get_db),
-                            current_user: UserCurrent = Depends(get_current_active_user)):
-    role_verification(current_user, 'one_category_data')
+async def one_category_data(category_id: int, db: Session = Depends(get_db)):
     return one_category(category_id, db).first()
 
 
 @router_category.get("/one_category_item")
-async def one_category_item_data(category_item_id: int, db: Session = Depends(get_db),
-                                 current_user: UserCurrent = Depends(get_current_active_user)):
-    role_verification(current_user, 'one_category_item_data')
+async def one_category_item_data(category_item_id: int, db: Session = Depends(get_db)):
     return one_category_item(category_item_id, db).first()
