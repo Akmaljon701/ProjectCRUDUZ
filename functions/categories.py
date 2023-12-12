@@ -7,7 +7,7 @@ from utils.pagination import save_in_db
 
 
 def one_category(category_id, db):
-    items = db.query(CategoryItems).filter_by(category_id=category_id).all()
+    items = db.query(CategoryItems).filter_by(category_id=category_id).order_by(desc('CategoryItems.id')).all()
     category = db.query(Categories).filter_by(id=category_id).first()
     if category: category.category_items = items
     else: return HTTPException(detail='Category not found!', status_code=404)
