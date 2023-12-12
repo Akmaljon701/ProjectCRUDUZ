@@ -1,3 +1,4 @@
+from fastapi import HTTPException
 from sqlalchemy import desc
 from sqlalchemy.orm import joinedload
 
@@ -6,7 +7,11 @@ from utils.pagination import save_in_db
 
 
 def one_category(category_id, db):
-    return db.query(Categories).filter_by(id=category_id).options(joinedload('category_items'))
+    items = db.query(CategoryItems).filter_by(category_id=category_id).all()
+    category = db.query(Categories).filter_by(id=category_id).first()
+    if category: category.category_items = items
+    else: return HTTPException(detail='Category not found!', status_code=404)
+    return category
 
 
 def one_category_item(category_item_id, db):

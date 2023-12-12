@@ -63,7 +63,7 @@ async def category_item_update_data(form: CategoryItemUpdate,
 
 @router_category.get("/one_category")
 async def one_category_data(category_id: int, db: Session = Depends(get_db)):
-    return one_category(category_id, db).first()
+    return one_category(category_id, db)
 
 
 @router_category.get("/one_category_item")
