@@ -35,6 +35,8 @@ async def create_uploaded_file_data(source_id: int = Body(..., ge=0),
                 f.write(contents)
             create_uploaded_file(source_id=source_id, source=source, file_name=file.filename, comment=comment,
                                  user=current_user, db=db)
+        else:
+            raise HTTPException(status_code=422, detail="File type error!")
     raise HTTPException(status_code=201, detail="Added successfully!")
 
 
