@@ -20,9 +20,9 @@ router_uploaded_files = APIRouter()
 
 @router_uploaded_files.post("/add")
 async def create_uploaded_file_data(source_id: int = Body(..., ge=0),
-                                    comment: typing.Optional[str] = Body(''),
-                                    source: typing.Optional[str] = Body(''),
-                                    files: typing.Optional[typing.List[UploadFile]] = File(None),
+                                    comment: str = Body(...),
+                                    source: str = Body(...),
+                                    files: typing.Optional[typing.List[UploadFile]] = File(...),
                                     db: Session = Depends(get_db),
                                     current_user: UserCurrent = Depends(get_current_active_user)):
     role_verification(current_user, 'create_uploaded_file_data')
@@ -35,7 +35,7 @@ async def create_uploaded_file_data(source_id: int = Body(..., ge=0),
                 f.write(contents)
             create_uploaded_file(source_id=source_id, source=source, file_name=file.filename, comment=comment,
                                  user=current_user, db=db)
-            raise HTTPException(status_code=201, detail="Added successfully!")
+    raise HTTPException(status_code=201, detail="Added successfully!")
 
 
 @router_uploaded_files.post("/files_by_source_id")
