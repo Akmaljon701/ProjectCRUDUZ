@@ -20,7 +20,7 @@ def role_verification(user, function):
 
 allowed_image_types = ["image/png", "image/jpg", "image/jpeg"]
 allowed_video_types = ["video/mp4", "video/avi"]
-allowed_audio_types = ["audio/mp3", "audio/wav"]  # Audio fayllar
+allowed_audio_types = ["audio/mp3", "audio/wav"]
 allowed_voice_types = ["audio/ogg", "audio/mpeg"]  # Ovozli habar fayllari
 allowed_document_types = ["application/pdf", "application/msword"]  # Hujjat fayllari
 allowed_other_types = ["application/octet-stream"]  # Boshqa fayl formatlari

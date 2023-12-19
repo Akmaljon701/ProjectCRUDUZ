@@ -19,10 +19,10 @@ router_uploaded_files = APIRouter()
 
 
 @router_uploaded_files.post("/add")
-async def create_uploaded_file_data(source_id: int = Body(..., ge=0),
-                                    comment: str = Body(...),
-                                    source: str = Body(...),
-                                    files: typing.Optional[typing.List[UploadFile]] = File(...),
+async def create_uploaded_file_data(source_id: int = Form(..., ge=0),
+                                    comment: str = Form(...),
+                                    source: str = Form(...),
+                                    files: typing.List[UploadFile] = File(...),
                                     db: Session = Depends(get_db),
                                     current_user: UserCurrent = Depends(get_current_active_user)):
     role_verification(current_user, 'create_uploaded_file_data')
@@ -67,6 +67,8 @@ async def update_uploaded_file_data(file_id: int = File(ge=0), file: UploadFile 
                 contents = await file.read()
                 with open(f"media/{file.filename}", "wb") as f:
                     f.write(contents)
+            else:
+                raise HTTPException(status_code=422, detail="File type error!")
             if file_data.file:
                 if os.path.exists(file_data.file):
                     os.unlink(file_data.file)
