@@ -25,8 +25,3 @@ def read_file_by_id(file_id, db):
     file = db.query(UploadedFiles).filter_by(id=file_id).first()
     if file: return file
     return False
-
-
-async def update_file_by_id(file_id, file, comment, source, user, db):
-    file_data = db.query(UploadedFiles).filter_by(id=file_id).first()
-    return file_data
