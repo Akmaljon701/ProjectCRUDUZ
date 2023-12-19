@@ -18,8 +18,6 @@ def create_uploaded_file(source_id, source, file_name, comment, user, db):
 
 def read_files_by_source_id(source_id, db):
     files = db.query(UploadedFiles).filter_by(source_id=source_id).all()
-    if not files:
-        raise HTTPException(status_code=404, detail="Files not found!")
     return files
 
 
