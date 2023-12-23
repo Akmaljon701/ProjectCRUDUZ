@@ -16,7 +16,6 @@ def save_in_db(db, obj):
     db.add(obj)
     db.commit()
     db.refresh(obj)
-    return obj
 
 
 def the_one(db, model, id):

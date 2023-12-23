@@ -11,20 +11,22 @@ pwd_context = CryptContext(schemes=['bcrypt'])
 
 def all_users(search, status, role, page, limit, db):
     users = db.query(Users)
+
     if search:
-        search_formatted = "%{}%".format(search)
-        users = users.filter(Users.name.like(search_formatted) | Users.number.like(search_formatted) | Users.username.like(
-            search_formatted))
-    if status in [True, False]:
+        search_formatted = f"%{search}%"
+        users = users.filter(
+            Users.name.ilike(search_formatted) | Users.username.ilike(search_formatted)
+        )
+
+    if status is not None:
         users = users.filter(Users.status == status)
+
     if role:
         users = users.filter(Users.role == role)
+
     users = users.order_by(Users.name.asc())
-    users = users.order_by(Users.name.asc())
-    if page and limit:
-        return pagination(users, page, limit)
-    else:
-        return users.all()
+
+    return pagination(users, page, limit)
 
 
 def one_user(id, db):

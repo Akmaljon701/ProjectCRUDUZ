@@ -11,6 +11,7 @@ class CategoryCreate(BaseModel):
 class CategoryItemsCreate(BaseModel):
     category_id: int
     text: str
+    ordinal_number: int
 
 
 class CategoryUpdate(BaseModel):

@@ -11,15 +11,15 @@ class Categories(Base):
     comment = Column(Text)
     user_id = Column(Integer)
 
-    category_items = relationship('CategoryItems', back_populates='category')
-
 
 class CategoryItems(Base):
     __tablename__ = "CategoryItems"
     id = Column(Integer, primary_key=True)
     text = Column(Text)
-    category_id = Column(Integer, ForeignKey("Categories.id"))
+    category_id = Column(Integer)
     user_id = Column(Integer, ForeignKey("Users.id"))
     ordinal_number = Column(Integer)
 
-    category = relationship('Categories', back_populates='category_items')
+    category = relationship('Categories', foreign_keys=[category_id],
+                            primaryjoin=lambda: and_(Categories.id == CategoryItems.category_id),
+                            backref=backref("category_items"))

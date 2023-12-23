@@ -37,6 +37,7 @@ def create_category_items(form, user, db):
         else:
             new_category_item = CategoryItems(
                 text=item.text,
+                ordinal_number=item.ordinal_number,
                 category_id=item.category_id,
                 user_id=user.id
             )

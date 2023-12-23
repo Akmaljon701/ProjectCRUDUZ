@@ -1,13 +1,9 @@
-from db import SessionLocal
-from fastapi import FastAPI, Request, Response
-from fastapi_utils.tasks import repeat_every
-from sqlalchemy.orm import Session
-import traceback
-from fastapi.openapi.utils import get_openapi
 from routes import auth, users, projects, categories, targets, uploaded_files
-from db import Base, engine
-
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi import FastAPI
+from routes import auth, users
+from db import Base, engine
+from fastapi.openapi.utils import get_openapi
 
 Base.metadata.create_all(bind=engine)
 
@@ -44,7 +40,7 @@ def custom_openapi():
         return app.openapi_schema
     openapi_schema = get_openapi(
         title="Crud group",
-        version="3.8.10",
+        version="3.10",
         routes=app.routes,
     )
     app.openapi_schema = openapi_schema
